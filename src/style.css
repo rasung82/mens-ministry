@@ -1,26 +1,122 @@
 @import "tailwindcss";
 
-/* 시안 B 테마 — 색과 폰트는 여기 한 곳에서만 바꾸면 전체에 반영됩니다. */
-@theme {
+/*
+ * 테마 — 색과 폰트는 이 파일에서만 바꿉니다.
+ * 계절 색상은 아래 [data-season] 블록의 변수 값이고,
+ * 어떤 계절을 쓸지는 src/utils/season.ts 가 <html data-season="..."> 으로 정합니다.
+ */
+@theme inline {
   --font-sans: "IBM Plex Sans KR", system-ui, sans-serif;
 
-  /* 주 색상 (남색) */
-  --color-brand-50: #f2f4f8;   /* 페이지 배경 */
-  --color-brand-100: #e3e8f7;  /* 배지 배경 */
-  --color-brand-200: #d7ddf0;  /* 남색 위 보조 글자 */
-  --color-brand-700: #22357a;  /* 헤더, 버튼 */
-  --color-brand-900: #16245a;  /* hover */
+  /* 주 색상 (파스텔) */
+  --color-brand-50: var(--brand-50);    /* 페이지 배경 */
+  --color-brand-100: var(--brand-100);  /* 배지 배경 */
+  --color-brand-300: var(--brand-300);  /* 헤더, 버튼 바탕 */
+  --color-brand-400: var(--brand-400);  /* 바탕 hover */
+  --color-brand-700: var(--brand-700);  /* 강조 글자, 선 */
+  --color-on-brand: var(--on-brand);    /* brand-300 바탕 위 글자 */
 
-  /* 강조 색상 (호박색) */
-  --color-accent-100: #fcebd3;
-  --color-accent-800: #8a4b08;
-  --color-accent-900: #5c3405;
+  /* 강조 색상 */
+  --color-accent-100: var(--accent-100);
+  --color-accent-800: var(--accent-800);
+  --color-accent-900: var(--accent-900);
+
+  /* 카드 바탕색 (섹션마다 다르게 쓰는 파스텔) */
+  --color-tint-1: var(--tint-1);
+  --color-tint-2: var(--tint-2);
+  --color-tint-3: var(--tint-3);
+  --color-tint-4: var(--tint-4);
 
   /* 글자, 선 */
-  --color-ink: #18203a;
-  --color-body: #4a5270;
-  --color-muted: #5b6380;
-  --color-line: #e6e9f0;
+  --color-ink: var(--ink);
+  --color-body: var(--body);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+}
+
+/* 가을 (기본값) — 단풍 살구빛, 은은한 황금색 강조 */
+:root,
+[data-season="autumn"] {
+  --brand-50: #fdf8f0;
+  --brand-100: #f8ead6;
+  --brand-300: #f0cfa8;
+  --brand-400: #e8bf93;
+  --brand-700: #a85a35;
+  --on-brand: #4a2c1a;
+  --accent-100: #fbf0c8;
+  --accent-800: #7a5a10;
+  --accent-900: #5a4308;
+  --tint-1: #fbe3d2;
+  --tint-2: #f6ecc4;
+  --tint-3: #f3d9d0;
+  --tint-4: #e4ead0;
+  --ink: #3a2c24;
+  --body: #66544a;
+  --muted: #7a6659;
+  --line: #f0e6d8;
+}
+
+/* 봄 — 연둣빛, 연분홍 강조 */
+[data-season="spring"] {
+  --brand-50: #f8fbf5;
+  --brand-100: #e6f3df;
+  --brand-300: #cfe8c4;
+  --brand-400: #bddcb0;
+  --brand-700: #3f7a52;
+  --on-brand: #25432f;
+  --accent-100: #fde8ee;
+  --accent-800: #98384f;
+  --accent-900: #6b2538;
+  --tint-1: #fde6ee;
+  --tint-2: #e4f2d6;
+  --tint-3: #fdf3cf;
+  --tint-4: #e6e8fa;
+  --ink: #26362b;
+  --body: #506258;
+  --muted: #5f7366;
+  --line: #e8f0e5;
+}
+
+/* 여름 — 하늘색, 연한 산호색 강조 */
+[data-season="summer"] {
+  --brand-50: #f4fafc;
+  --brand-100: #def0f6;
+  --brand-300: #bfe3ee;
+  --brand-400: #a9d8e8;
+  --brand-700: #2a7590;
+  --on-brand: #17404f;
+  --accent-100: #fee9df;
+  --accent-800: #9a4420;
+  --accent-900: #6b2e14;
+  --tint-1: #d9eef7;
+  --tint-2: #fde9d9;
+  --tint-3: #d9f2e6;
+  --tint-4: #eee3f7;
+  --ink: #1f3640;
+  --body: #48616b;
+  --muted: #587079;
+  --line: #e3eef2;
+}
+
+/* 겨울 — 연한 남보라, 연한 호박색 강조 */
+[data-season="winter"] {
+  --brand-50: #f6f7fb;
+  --brand-100: #e9edf8;
+  --brand-300: #cfd8f0;
+  --brand-400: #bcc8e8;
+  --brand-700: #3a4f94;
+  --on-brand: #232f5c;
+  --accent-100: #fdf0dc;
+  --accent-800: #94560f;
+  --accent-900: #66390a;
+  --tint-1: #dfe6f8;
+  --tint-2: #f6e6ef;
+  --tint-3: #e0f1f1;
+  --tint-4: #fcefd9;
+  --ink: #272f4a;
+  --body: #525a78;
+  --muted: #626a86;
+  --line: #eaedf4;
 }
 
 @layer base {

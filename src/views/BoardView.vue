@@ -29,7 +29,7 @@ const filtered = computed(() =>
         :key="c"
         type="button"
         class="min-h-10 shrink-0 rounded-full px-4 text-[15px]"
-        :class="selected === c ? 'bg-brand-700 font-bold text-white' : 'border border-line bg-white text-ink'"
+        :class="selected === c ? 'bg-brand-300 font-bold text-on-brand' : 'border border-line bg-white text-ink'"
         :aria-pressed="selected === c"
         @click="selected = c"
       >

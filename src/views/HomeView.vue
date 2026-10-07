@@ -4,6 +4,7 @@ import MeetingCard from '@/components/MeetingCard.vue'
 import PostRow from '@/components/PostRow.vue'
 import LoadState from '@/components/LoadState.vue'
 import AppIcon from '@/components/AppIcon.vue'
+import SeasonEmblem from '@/components/SeasonEmblem.vue'
 import { useAsync } from '@/composables/useAsync'
 import { fetchMeetings, fetchOfficers, fetchPosts } from '@/api'
 import { telHref } from '@/utils/format'
@@ -17,15 +18,18 @@ const recentPosts = computed(() => (posts.data.value ?? []).slice(0, 4))
 
 <template>
   <!-- 상단 소개 (헤더와 같은 남색으로 이어짐) -->
-  <section class="bg-brand-700 text-white">
-    <div class="mx-auto flex max-w-6xl flex-col gap-3 px-4 pt-6 pb-16 md:px-6 md:pt-10 md:pb-20">
-      <h1 class="text-[28px] leading-snug font-bold md:text-[38px]">
-        새로 맡으셨나요?<br class="md:hidden" />
-        여기서 시작하세요.
-      </h1>
-      <p class="max-w-xl text-[15px] text-brand-200 md:text-base">
-        전도회의 정기 모임과 행사를 어떻게 준비하는지, 전임자가 남긴 기록을 한곳에 모았습니다.
-      </p>
+  <section class="bg-brand-300 text-on-brand">
+    <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 pt-6 pb-16 md:px-6 md:pt-10 md:pb-20">
+      <div class="flex flex-col gap-3">
+        <h1 class="text-[28px] leading-snug font-bold md:text-[38px]">
+          새로 맡으셨나요?<br class="md:hidden" />
+          여기서 시작하세요.
+        </h1>
+        <p class="max-w-xl text-[15px] text-on-brand/80 md:text-base">
+          전도회의 정기 모임과 행사를 어떻게 준비하는지, 전임자가 남긴 기록을 한곳에 모았습니다.
+        </p>
+      </div>
+      <SeasonEmblem class="size-20 shrink-0 self-start md:size-44 md:self-center" />
     </div>
   </section>
 
@@ -33,7 +37,7 @@ const recentPosts = computed(() => (posts.data.value ?? []).slice(0, 4))
     <!-- 모임 카드: meetings.json에 항목을 추가하면 카드가 자동으로 늘어납니다 -->
     <LoadState :loading="meetings.loading.value" :error="meetings.error.value" @retry="meetings.reload">
       <section class="grid grid-cols-1 gap-4 md:grid-cols-[repeat(auto-fit,minmax(280px,1fr))] md:gap-5">
-        <MeetingCard v-for="m in meetings.data.value" :key="m.id" :meeting="m" />
+        <MeetingCard v-for="(m, i) in meetings.data.value" :key="m.id" :meeting="m" :index="i" />
       </section>
     </LoadState>
 
@@ -67,13 +71,13 @@ const recentPosts = computed(() => (posts.data.value ?? []).slice(0, 4))
         </div>
 
         <!-- 올해 임원 -->
-        <div class="flex flex-col rounded-2xl bg-white p-5 md:order-1 md:p-6">
+        <div class="flex flex-col rounded-2xl bg-tint-4 p-5 md:order-1 md:p-6">
           <h2 class="mb-2 text-lg font-bold">올해 임원</h2>
           <LoadState :loading="officers.loading.value" :error="officers.error.value" @retry="officers.reload">
             <div
               v-for="o in officers.data.value"
               :key="o.role"
-              class="flex min-h-12 items-center justify-between gap-3 border-t border-line text-[15px]"
+              class="flex min-h-12 items-center justify-between gap-3 border-t border-on-brand/15 text-[15px]"
             >
               <span><span class="inline-block w-11 text-muted">{{ o.role }}</span>{{ o.name }}</span>
               <a

@@ -27,19 +27,19 @@ watchEffect(() => {
   >
     <template v-if="meeting">
       <!-- 제목 영역 -->
-      <section class="bg-brand-700 text-white">
+      <section class="bg-brand-300 text-on-brand">
         <div class="mx-auto flex max-w-4xl flex-col gap-3 px-4 pt-4 pb-14 md:px-6 md:pt-8 md:pb-16">
-          <RouterLink to="/" class="flex min-h-11 w-fit items-center gap-1 text-sm text-brand-200 hover:text-white">
+          <RouterLink to="/" class="flex min-h-11 w-fit items-center gap-1 text-sm text-on-brand/80 hover:text-on-brand">
             <AppIcon name="arrow-left" />홈으로
           </RouterLink>
           <span
             class="w-fit rounded-full px-2.5 py-0.5 text-[13px] font-bold"
-            :class="meeting.tone === 'special' ? 'bg-accent-100 text-accent-800' : 'bg-white/15 text-white'"
+            :class="meeting.tone === 'special' ? 'bg-accent-100 text-accent-800' : 'bg-white/50 text-on-brand'"
           >
             {{ meeting.cycle }}
           </span>
           <h1 class="text-[28px] font-bold md:text-4xl">{{ meeting.title }} 진행 가이드</h1>
-          <p class="text-[15px] text-brand-200 md:text-base">{{ meeting.summary }}</p>
+          <p class="text-[15px] text-on-brand/80 md:text-base">{{ meeting.summary }}</p>
         </div>
       </section>
 
@@ -62,12 +62,12 @@ watchEffect(() => {
         </section>
 
         <!-- 준비 체크리스트 (체크 표시는 저장되지 않습니다) -->
-        <section class="card">
+        <section class="card bg-tint-1">
           <h2 class="card-title">준비 체크리스트</h2>
           <label
             v-for="(c, i) in meeting.checklist"
             :key="i"
-            class="flex cursor-pointer items-start gap-3 border-t border-line py-3.5 text-[15px] md:text-base"
+            class="flex cursor-pointer items-start gap-3 border-t border-on-brand/15 py-3.5 text-[15px] md:text-base"
           >
             <input type="checkbox" class="mt-1 size-5 shrink-0 accent-brand-700" />
             <span><b class="mr-1.5 text-brand-700">{{ c.when }}</b>{{ c.task }}</span>
@@ -75,7 +75,7 @@ watchEffect(() => {
         </section>
 
         <!-- 진행 순서 -->
-        <section class="card">
+        <section class="card bg-tint-2">
           <h2 class="card-title">진행 순서</h2>
           <ol class="ml-2 border-l-2 border-brand-700">
             <li v-for="(p, i) in meeting.program" :key="i" class="pb-4 pl-5 last:pb-0">
@@ -92,7 +92,7 @@ watchEffect(() => {
         </section>
 
         <!-- 첨부 자료 -->
-        <section v-if="meeting.files.length" class="card">
+        <section v-if="meeting.files.length" class="card bg-tint-3">
           <h2 class="card-title">첨부 자료</h2>
           <div class="flex flex-col gap-2.5 md:flex-row md:flex-wrap">
             <a
@@ -101,7 +101,7 @@ watchEffect(() => {
               :href="f.url"
               target="_blank"
               rel="noopener"
-              class="flex min-h-12 items-center justify-between gap-3 rounded-lg border border-line px-4 font-medium hover:border-brand-700"
+              class="flex min-h-12 items-center justify-between gap-3 rounded-lg border border-on-brand/15 bg-white/60 px-4 font-medium hover:border-brand-700"
             >
               {{ f.label }}<AppIcon name="download" class="text-brand-700" />
             </a>
@@ -129,7 +129,7 @@ watchEffect(() => {
   @apply text-right text-[15px] font-bold md:text-left md:text-base;
 }
 .card {
-  @apply rounded-2xl bg-white p-5 md:p-7;
+  @apply rounded-2xl p-5 md:p-7;
 }
 .card-title {
   @apply mb-3 text-lg font-bold md:text-xl;

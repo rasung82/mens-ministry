@@ -7,7 +7,7 @@ const { data: meetings } = useAsync(fetchMeetings)
 </script>
 
 <template>
-  <header class="bg-brand-700 text-white">
+  <header class="bg-brand-300 text-on-brand">
     <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-4 py-3 md:px-6 md:py-4">
       <RouterLink to="/" class="text-lg font-bold md:text-xl">[3남전도회] 운영 안내</RouterLink>
 
@@ -33,9 +33,9 @@ const { data: meetings } = useAsync(fetchMeetings)
 @reference "../style.css";
 
 .nav-link {
-  @apply rounded-md px-3.5 py-2.5 font-medium text-white/90 hover:bg-white/10 hover:text-white;
+  @apply rounded-md px-3.5 py-2.5 font-medium text-on-brand/90 hover:bg-white/40 hover:text-on-brand;
 }
 .nav-link-active {
-  @apply bg-white/15 text-white;
+  @apply bg-white/60 text-on-brand;
 }
 </style>
