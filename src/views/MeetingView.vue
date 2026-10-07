@@ -4,6 +4,7 @@ import { useRoute } from 'vue-router'
 import LoadState from '@/components/LoadState.vue'
 import MarkdownBlock from '@/components/MarkdownBlock.vue'
 import AppIcon from '@/components/AppIcon.vue'
+import TimelineSteps from '@/components/TimelineSteps.vue'
 import { useAsync } from '@/composables/useAsync'
 import { fetchMeeting } from '@/api'
 import { formatDate, formatDotDate } from '@/utils/format'
@@ -11,6 +12,13 @@ import { formatDate, formatDotDate } from '@/utils/format'
 const route = useRoute()
 const id = computed(() => String(route.params.id))
 const { data: meeting, loading, error, reload } = useAsync(() => fetchMeeting(id.value), id)
+
+// 다음 일정이 없으면(날짜도 문구도 비어 있으면) 화면에 표시하지 않습니다.
+const nextSchedule = computed(() => {
+    const m = meeting.value
+    if (!m) return ''
+    return m.nextDate ? formatDate(m.nextDate) : (m.nextDateText ?? '').trim()
+})
 
 watchEffect(() => {
     if (meeting.value) document.title = `${meeting.value.title} · [○○전도회]`
@@ -45,10 +53,13 @@ watchEffect(() => {
 
       <main class="mx-auto -mt-8 flex max-w-4xl flex-col gap-6 px-4 pb-12 md:gap-8 md:px-6 md:pb-20">
         <!-- 기본 정보 -->
-        <section class="grid grid-cols-1 rounded-2xl bg-white shadow-sm md:grid-cols-4">
-          <div class="info-cell">
+        <section
+          class="grid grid-cols-1 rounded-2xl bg-white shadow-sm"
+          :class="nextSchedule ? 'md:grid-cols-4' : 'md:grid-cols-3'"
+        >
+          <div v-if="nextSchedule" class="info-cell">
             <span class="info-label">다음 일정</span>
-            <span class="info-value">{{ meeting.nextDate ? formatDate(meeting.nextDate) : meeting.nextDateText }}</span>
+            <span class="info-value">{{ nextSchedule }}</span>
           </div>
           <div class="info-cell">
             <span class="info-label">일시</span><span class="info-value">{{ meeting.schedule }}</span>
@@ -76,8 +87,12 @@ watchEffect(() => {
 
         <!-- 진행 순서 -->
         <section class="card bg-tint-2">
-          <h2 class="card-title">진행 순서</h2>
-          <ol class="ml-2 border-l-2 border-brand-700">
+          <h2 class="card-title">{{ meeting.programTitle || '진행 순서' }}</h2>
+
+          <!-- 시기별 준비 진행사항 타임라인 (meetings.json의 timeline: true). 행사 날짜(nextDate)가 있으면 오늘 기준 단계를 강조합니다 -->
+          <TimelineSteps v-if="meeting.timeline" :items="meeting.checklist" :event-date="meeting.nextDate" :class="{ 'mb-6': meeting.program.length }" />
+
+          <ol v-if="meeting.program.length" class="ml-2 border-l-2 border-brand-700">
             <li v-for="(p, i) in meeting.program" :key="i" class="pb-4 pl-5 last:pb-0">
               <b>{{ p.title }}</b>
               <span v-if="p.note" class="block text-[15px] text-muted md:ml-2 md:inline">{{ p.note }}</span>

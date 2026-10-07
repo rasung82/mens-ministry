@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /** 하단 탭·버튼에 쓰는 선 아이콘. 새 아이콘은 paths에 추가하세요. */
-defineProps<{ name: 'home' | 'calendar' | 'flame' | 'music' | 'book' | 'board' | 'phone' | 'download' | 'arrow-left' }>()
+defineProps<{ name: 'home' | 'calendar' | 'flame' | 'music' | 'book' | 'board' | 'phone' | 'download' | 'arrow-left' | 'check' }>()
 </script>
 
 <template>
@@ -29,6 +29,7 @@ defineProps<{ name: 'home' | 'calendar' | 'flame' | 'music' | 'book' | 'board' |
       <path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z" />
     </template>
     <template v-else-if="name === 'download'"><path d="M12 4v12M6 11l6 6 6-6M5 20h14" /></template>
+    <template v-else-if="name === 'check'"><path d="M5 12.5l4.5 4.5L19 7.5" /></template>
     <template v-else-if="name === 'arrow-left'"><path d="M19 12H5M11 6l-6 6 6 6" /></template>
   </svg>
 </template>

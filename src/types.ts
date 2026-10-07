@@ -18,7 +18,11 @@ export interface Meeting {
     place: string
     owner: string
     summary: string
-    checklist: { when: string; task: string }[]
+    checklist: { when: string; task: string; /** 행사일 며칠 전인지. 비우면 when 문구('2주 전' 등)에서 읽습니다 */ daysBefore?: number }[]
+    /** 진행 순서 영역의 제목. 비우면 "진행 순서" */
+    programTitle?: string
+    /** true면 진행 영역 위에 준비 시기별 타임라인 그림을 함께 보여줍니다 */
+    timeline?: boolean
     program: { title: string; note?: string }[]
     /** 전임자 메모 — 마크다운으로 자유롭게 작성 */
     memo?: string
