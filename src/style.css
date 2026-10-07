@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+/* 시안 B 테마 — 색과 폰트는 여기 한 곳에서만 바꾸면 전체에 반영됩니다. */
+@theme {
+  --font-sans: "IBM Plex Sans KR", system-ui, sans-serif;
+
+  /* 주 색상 (남색) */
+  --color-brand-50: #f2f4f8;   /* 페이지 배경 */
+  --color-brand-100: #e3e8f7;  /* 배지 배경 */
+  --color-brand-200: #d7ddf0;  /* 남색 위 보조 글자 */
+  --color-brand-700: #22357a;  /* 헤더, 버튼 */
+  --color-brand-900: #16245a;  /* hover */
+
+  /* 강조 색상 (호박색) */
+  --color-accent-100: #fcebd3;
+  --color-accent-800: #8a4b08;
+  --color-accent-900: #5c3405;
+
+  /* 글자, 선 */
+  --color-ink: #18203a;
+  --color-body: #4a5270;
+  --color-muted: #5b6380;
+  --color-line: #e6e9f0;
+}
+
+@layer base {
+  body {
+    @apply bg-brand-50 font-sans text-ink antialiased;
+  }
+}
+
+/* 마크다운 본문 스타일 */
+@layer components {
+  .prose-md {
+    @apply text-[15px] leading-7 text-ink md:text-base;
+  }
+  .prose-md h2 {
+    @apply mt-6 mb-2 text-lg font-bold;
+  }
+  .prose-md h3 {
+    @apply mt-4 mb-1 font-bold;
+  }
+  .prose-md p {
+    @apply my-2;
+  }
+  .prose-md ul {
+    @apply my-2 list-disc pl-5;
+  }
+  .prose-md ol {
+    @apply my-2 list-decimal pl-5;
+  }
+  .prose-md a {
+    @apply text-brand-700 underline;
+  }
+  .prose-md strong {
+    @apply font-bold;
+  }
+}
