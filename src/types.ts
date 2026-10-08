@@ -13,6 +13,13 @@ export interface Meeting {
     tone: 'regular' | 'special'
     /** 다음 일정 (YYYY-MM-DD). 정해지지 않았으면 nextDateText 사용 */
     nextDate?: string
+    /**
+     * 반복 규칙. 있으면 nextDate를 오늘 기준으로 자동 계산합니다. weekday는 0=일요일.
+     * 매년: 11월 셋째 주 일요일 → { month: 11, week: 3, weekday: 0 }
+     * 매월: 둘째 주 일요일 → { week: 2, weekday: 0 } (month 생략)
+     * 비정기 모임은 repeat와 nextDate를 모두 비워 두면 다음 일정이 표시되지 않습니다.
+     */
+    repeat?: { month?: number; week: number; weekday: number }
     nextDateText?: string
     schedule: string
     place: string

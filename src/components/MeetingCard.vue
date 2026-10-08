@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import type { Meeting } from '@/types'
 import { formatDate } from '@/utils/format'
 
@@ -7,6 +8,11 @@ const props = defineProps<{ meeting: Meeting; index?: number }>()
 // 카드마다 다른 파스텔 바탕을 돌려가며 씁니다.
 const tints = ['bg-tint-1', 'bg-tint-2', 'bg-tint-3', 'bg-tint-4']
 const tint = tints[(props.index ?? 0) % tints.length]
+
+// 다음 일정이 없으면(비정기 모임 등) 표시하지 않습니다.
+const nextSchedule = computed(() =>
+    props.meeting.nextDate ? formatDate(props.meeting.nextDate, false) : (props.meeting.nextDateText ?? '').trim(),
+)
 </script>
 
 <template>
@@ -18,8 +24,8 @@ const tint = tints[(props.index ?? 0) % tints.length]
       >
         {{ meeting.cycle }}
       </span>
-      <span class="text-sm text-muted">
-        다음 {{ meeting.nextDate ? formatDate(meeting.nextDate, false) : meeting.nextDateText }}
+      <span v-if="nextSchedule" class="text-sm text-muted">
+        다음 {{ nextSchedule }}
       </span>
     </div>
 
