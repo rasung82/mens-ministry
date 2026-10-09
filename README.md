@@ -14,7 +14,7 @@ Node.js(LTS 버전)가 필요합니다.
 ```bash
 npm install      # 처음 한 번
 npm run dev      # 개발 서버 → http://localhost:5173
-npm run build    # 배포용 파일 생성 → dist/
+npm run build    # 배포용 파일 생성 → docs/
 npm run preview  # 빌드 결과 미리보기
 ```
 
@@ -56,7 +56,6 @@ npm run preview  # 빌드 결과 미리보기
 ```
 public/
   data/            ← 내용(JSON)
-  _redirects       ← Netlify·Cloudflare Pages용 새로고침 404 방지
 src/
   api/             ← 데이터 불러오기 (axios). 나중에 API 서버로 바꿀 때 여기만 수정
   components/      ← 헤더, 하단 탭, 모임 카드, 게시글 줄 등
@@ -72,12 +71,20 @@ src/
 
 ## 배포
 
-`npm run build`로 만든 `dist/` 폴더를 정적 호스팅에 올리면 됩니다.
+이 저장소는 **GitHub Pages**(`/docs` 폴더 서빙)로 배포합니다.
 
-- **Cloudflare Pages / Netlify** (추천): GitHub 저장소를 연결하고
-  빌드 명령 `npm run build`, 출력 폴더 `dist`로 설정하면 JSON 수정 → 커밋할 때마다 자동 배포됩니다.
-- **GitHub Pages**: 새로고침 시 404가 날 수 있으니 `src/router/index.ts`의
-  `createWebHistory`를 `createWebHashHistory`로 바꾸세요. 하위 경로에 배포하면 `vite.config.ts`에 `base`도 지정해야 합니다.
+1. `npm run build`를 실행하면 `docs/` 폴더에 배포용 파일이 생성됩니다.
+2. `docs/` 폴더를 커밋하고 push합니다.
+3. GitHub 저장소 **Settings → Pages**에서 Source를 `Deploy from a branch`,
+   Branch를 `master` / 폴더를 `/docs`로 설정합니다.
+4. 사이트는 `https://rasung82.github.io/mens-ministry/`에서 열립니다.
+
+새로고침·직접 URL 접근 시 404를 막기 위해 라우터는 `createWebHashHistory`를 사용합니다
+(URL이 `.../#/board` 형태가 됩니다). `vite.config.ts`의 `base`는 저장소 이름(`/mens-ministry/`)과
+맞춰져 있으니, 저장소 이름을 바꾸면 함께 수정하세요.
+
+> JSON(`public/data/*.json`)을 수정한 뒤에는 반드시 `npm run build`를 다시 실행해서
+> `docs/` 폴더를 갱신하고 커밋해야 사이트에 반영됩니다.
 
 ## 주의
 
