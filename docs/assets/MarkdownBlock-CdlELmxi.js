@@ -1,0 +1,1 @@
+import{d as e,h as t,r as n,s as r}from"./runtime-core.esm-bundler-B3TJqqXq.js";import{a as i}from"./index-CXZjfS9v.js";var a=[`innerHTML`],o=e({__name:`MarkdownBlock`,props:{source:{}},setup(e){let o=e,s=n(()=>i(o.source));return(e,n)=>(t(),r(`div`,{class:`prose-md`,innerHTML:s.value},null,8,a))}});export{o as t};

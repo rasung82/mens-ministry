@@ -82,9 +82,9 @@
     "checklist": [
       { "when": "6주 전", "task": "대회 안내 및 기관별 회신 요청 (곡/인원/소요시간)" },
       { "when": "5주 전", "task": "포스터 제작 및 게제" },
-      { "when": "4주 전", "task": "주보 광고 요청 및 PPT 초안 작성" },
+      { "when": "4주 전", "task": "주보 광고 노출 및 PPT 초안 작성" },
       { "when": "3주 전", "task": "기관별 회신 마감 (사진/영상)" },
-      { "when": "2주 전", "task": "당일 순서 지정(제비뽑기), 예산 신청" },
+      { "when": "2주 전", "task": "당일 순서 지정(제비뽑기)" },
       { "when": "1주 전", "task": "상품권, 간식/음료 준비 및 PPT 완료" },
       { "when": "전날", "task": "순서지 제작/프린트, 특송" },
       { "when": "당일", "task": "1시간 전 집결, 대기석·입장 순서 확인" }
@@ -94,7 +94,7 @@
     "files": [
       { "label": "행사 안내서(1차)", "url": "https://app.notion.com/p/26-273b536f47f5808db238f176613b48ba" },
       { "label": "지난 대회 준비 과정", "url": "https://docs.google.com/spreadsheets/d/1kvEgt-25ipFaT23NjVIFC_unKOTdyTzLMSZvL68HW2Y/edit?gid=0#gid=0" },
-      { "label": "올해 대회 준비 과정", "url": "https://docs.google.com/spreadsheets/d/1_tqkXnb5j6erEtTwxJncOLhwTvOJRTSMKLpxQQHiTQA/edit?gid=0#gid=0" }
+      { "label": "올해 대회 준비 과정", "url": "#" }
     ],
     "updatedAt": "2026-10-07",
     "updatedBy": "[작성자]"
